@@ -23,10 +23,10 @@ endif
 all : $(TARGET)
 
 $(TARGET) : $(OBJS)
-	$(CC) $^ $(LFLAGS)  -o $@
+	$(CC) $^ $(LFLAGS) -o $@
 
 $(OBJ)/%.o : $(SRC)/%.cpp
-	$(CC) $< -I$(INCLUDE) $(CFLAGS)  -o $@
+	$(CC) $< -I$(INCLUDE) $(CFLAGS) -o $@
 
 clear :
 	$(DELETE)

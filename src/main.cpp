@@ -4,22 +4,20 @@
 #include <time.h>
 
 namespace fs = std::experimental::filesystem;
-std::string AutoEraser::deleteExt = "pdf";
 
 int main() {    
 
-    AutoEraser autoEraser("/home/kempfer/Desktop/winternacht", "pdf");
+    AutoEraser *autoEraser = new AutoEraser("/home/kempfer/Desktop/winternacht", "txt");
+    // Day - hour - min
+    autoEraser->SetDeadlineDate(0, 0, 1);
 
-    //Get files in dir
-    std::string path = "/home/kempfer/Desktop/winternacht";
-    for(auto p : fs::directory_iterator(path)) {
-      
+    time_t ct = autoEraser->deadlineDate;
+      std::cout << "Deadline: " << std::asctime(std::localtime(&ct)) << std::endl;
 
-    }
-
+    autoEraser->CheckFiles();
 
     //Get extensions of file
-
-        
+    delete autoEraser;
+    
     return 0;
 }
