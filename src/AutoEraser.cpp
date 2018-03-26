@@ -53,6 +53,14 @@ void AutoEraser::PrintDeadlineDate() {
     Log::LogInfo("Deadline: ", std::asctime(std::localtime(&ct)));
 }
 
+void AutoEraser::RemoveTrackingPath(std::string path) {
+    trackingPaths.erase(std::remove(trackingPaths.begin(), trackingPaths.end(), path), trackingPaths.end());
+}
+
+void AutoEraser::RemoveTrackingExt(std::string ext) {
+    trackingExts.erase(std::remove(trackingExts.begin(), trackingExts.end(), ext), trackingExts.end());
+}
+
 /* Private methods */
 
 bool AutoEraser::CheckFileExt(fs::directory_entry p) {

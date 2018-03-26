@@ -22,6 +22,8 @@ class AutoEraser {
         void SetDeadlineDate(int days, int hours, int mins);
         void AddTrackingPath(std::string path);
         void AddTrackingExt(std::string ext);
+        void RemoveTrackingPath(std::string path);
+        void RemoveTrackingExt(std::string ext);
         void PrintDeadlineDate();
 
         std::string trackingExt;

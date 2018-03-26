@@ -18,6 +18,8 @@ int main() {
 
     autoEraser->AddTrackingExt("txt");
 
+    autoEraser->RemoveTrackingPath("/home/kempfer/Desktop/winternacht/src");
+
     autoEraser->PrintDeadlineDate();
 
     autoEraser->CheckFiles();
