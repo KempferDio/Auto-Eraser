@@ -7,33 +7,40 @@
 #include <time.h>
 #include <experimental/filesystem>
 #include <algorithm>
+#include <vector>
+#include <Log.h>
 
 namespace fs = std::experimental::filesystem;
 
 class AutoEraser {
 
     public:
-        AutoEraser() {}
-        AutoEraser(std::string path, std::string ext);
+        AutoEraser();
         ~AutoEraser() {}
-
-        time_t GetFileCreationTime(fs::directory_entry p);
 
         void CheckFiles();
         void SetDeadlineDate(int days, int hours, int mins);
-        std::string GetFileExt(fs::directory_entry p);
+        void AddTrackingPath(std::string path);
+        void AddTrackingExt(std::string ext);
+        void PrintDeadlineDate();
 
-        int DeleteFile();
-
-        time_t deadlineDate;
         std::string trackingExt;
         std::string trackingPath;
+
+        std::vector<std::string> trackingPaths;
+        std::vector<std::string> trackingExts;
+        
+        time_t deadlineDate;
         int strideDay;
         int strideHours;
         int strideMins;
     private:
+        bool CheckFileExt(fs::directory_entry p);
+        time_t GetFileCreationTime(fs::directory_entry p);
+        std::string GetFileExt(fs::directory_entry p);
         time_t GetCurrentTime();
         std::string GetStringNameOfFile(fs::directory_entry p);
+        int DeleteFile(std::string filePath);
         
 };
 

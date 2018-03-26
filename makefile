@@ -10,15 +10,22 @@ TARGET = bin/AutoEraser
 SRCS = $(wildcard $(SRC)/*.cpp)
 OBJS = $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SRCS))
 
-CFLAGS = -c -Wall -std=gnu++17
+CFLAGS = -c -Wall -std=gnu++17 -DDEBUG
 LFLAGS = -lstdc++fs 
-DELETE = find . -name "*.o" -type f -delete
 
 
+UNAME = $(shell uname)
 
-ifeq ($(OC), Windows_NT)
+ifeq ($(UNAME), Windows_NT)
+	CFLAGS += -DWINDOWS
 	DELETE = del /S *.o
 endif
+
+ifeq ($(UNAME), Linux)
+	CFLAGS += -DLINUX
+	DELETE = find . -name "*.o" -type f -delete
+endif
+
 
 all : $(TARGET)
 
@@ -31,4 +38,4 @@ $(OBJ)/%.o : $(SRC)/%.cpp
 clear :
 	$(DELETE)
 
-.PHONY: all clear
+.PHONY: all clear os

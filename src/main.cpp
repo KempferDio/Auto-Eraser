@@ -7,12 +7,18 @@ namespace fs = std::experimental::filesystem;
 
 int main() {    
 
-    AutoEraser *autoEraser = new AutoEraser("/home/kempfer/Desktop/winternacht", "txt");
+    AutoEraser *autoEraser = new AutoEraser();
     // Day - hour - min
     autoEraser->SetDeadlineDate(0, 0, 1);
+    autoEraser->SetDeadlineDate(1, 0, 1);
+    
+    autoEraser->AddTrackingPath("/home/kempfer/Desktop/winternacht/include");
+    
+    autoEraser->AddTrackingPath("/home/kempfer/Desktop/winternacht/src");
 
-    time_t ct = autoEraser->deadlineDate;
-      std::cout << "Deadline: " << std::asctime(std::localtime(&ct)) << std::endl;
+    autoEraser->AddTrackingExt("txt");
+
+    autoEraser->PrintDeadlineDate();
 
     autoEraser->CheckFiles();
 
